@@ -1,1 +1,1 @@
-# projeto_turismo
+# Sistema de gerência de estoque/almoxarifado
