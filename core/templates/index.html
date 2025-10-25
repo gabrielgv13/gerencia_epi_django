@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+  <body class="image_and_text">
+    <section>
+      <img src="{% static 'images/004.jpg' %}" alt="prateleiras com items de almoxarifado" width="50%" height="100%">
+    </section>
+    
+    <section class="login_area">
+      <a class="title">FAÇA SEU LOGIN</a>
+      <form action="send login" method="post">
+        <div>
+          <label for="email">EMAIL: </label>
+          <input type="text" name="email" id="email" required />
+        </div>
+        <div>
+          <label for="password">SENHA: </label>
+          <input type="password" name="password" id="password" required />
+        </div>
+        <div>
+          <input type="submit" value="ENVIAR" />
+        </div>
+      </form>
+    </section>
+
+    <footer>
+
+    </footer>
+  </body>
+{% endblock %}
+</html>

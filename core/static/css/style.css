@@ -1,0 +1,41 @@
+
+@font-face {
+    font-family: 'glacial';
+    src: url('../fonts/GlacialIndifference-Regular.woff2') format('woff2');
+    font-weight: normal; /* 400 */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'glacial';
+    src: url('../fonts/GlacialIndifference-Bold.woff2') format('woff2');
+    font-weight: bold; /* 400 */
+    font-style: normal;
+}
+
+.image_and_text {
+    display: flex;
+    flex-direction: row;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: xx-large;
+    font-family: glacial;
+    font-weight: normal;
+}
+
+.login_area {
+    font-family: glacial;
+    font-weight: normal;
+    align-items: center;
+    justify-content: center;
+}
+
+head {
+    display: flex;
+    flex-direction: column;
+}
