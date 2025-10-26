@@ -13,7 +13,7 @@
     font-style: normal;
 }
 
-.image_and_text {
+.image_and_text_flex {
     display: flex;
     flex-direction: row;
 }
@@ -35,10 +35,12 @@
     justify-content: center;
 }
 
-.image_left_50_cent {
-    justify-content: left;
-    width: fit-content;
-    max-height: max-content;
+.image_login {
+    flex: 1; 
+    background-image: url('004.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 head {

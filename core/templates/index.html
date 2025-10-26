@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-  <body class="image_and_text">
-    <img src="{% static '004.jpg' %}" class="image_left_50_cent">
-    <section class="login_area">
+  <body class="image_and_text_flex">
+    
+    <div class="image_login">
+    </div>
+
+    <div class="login_area">
       <a class="title">FAÇA SEU LOGIN</a>
       <form action="send login" method="post">
         <div>
@@ -17,6 +21,6 @@
           <input type="submit" value="ENVIAR" />
         </div>
       </form>
-    </section>
+    </div>
   </body>
 {% endblock %}
