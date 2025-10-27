@@ -9,11 +9,17 @@ O sistema foi desenvolvido para auxiliar na administração do almoxarifado, fac
 Funcionalidades
 
 -Cadastro de itens, categorias e unidades de medida;
+
 -Controle de entrada e saída de materiais;
+
 -Registro e acompanhamento de empréstimos (como EPIs e ferramentas);
+
 -Cadastro de colaboradores e usuários do sistema;
+
 -Relatórios de movimentações e níveis de estoque;
+
 -Controle de permissões por tipo de usuário.
+
 
 Tecnologias Utilizadas:
 
