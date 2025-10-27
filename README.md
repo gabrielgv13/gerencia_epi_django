@@ -23,5 +23,6 @@ Funcionalidades
 
 Tecnologias Utilizadas:
 
--Frontend: HTML, CSS, JavaScript
--Backend: Python (Django)
+-Frontend: HTML, CSS, JavaScript;
+
+-Backend: Python (Django).
