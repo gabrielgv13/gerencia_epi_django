@@ -13,37 +13,54 @@
     font-style: normal;
 }
 
-.image_and_text_flex {
+.image__text__flex {
     display: flex;
     flex-direction: row;
+
+    /**/ /**/ /**/
 }
 
 .title {
     display: flex;
     flex-direction: column;
+
     align-items: center;
     justify-content: center;
+
     font-size: xx-large;
     font-family: glacial;
     font-weight: normal;
+
+    color: aqua;
 }
 
-.login_area {
-    font-family: glacial;
-    font-weight: normal;
+.login__area {
+    /**/
+
     align-items: center;
     justify-content: center;
+    
+    font-family: glacial;
+    font-weight: normal; 
+
+    /**/
 }
 
-.image_login {
+.image__login {
     flex: 1; 
+
     background-image: url('004.jpg');
-    background-size: cover;
+
     background-position: center;
+
+    background-size: cover;
     background-repeat: no-repeat;
 }
 
 head {
     display: flex;
     flex-direction: column;
+
+    /**/ /**/ /**/
+
 }
