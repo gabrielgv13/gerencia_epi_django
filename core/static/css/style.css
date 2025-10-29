@@ -12,11 +12,14 @@
     font-style: normal;
 }
 
+
 html, body {
+    /**/
     height: 100%;
     margin: 0;
     padding: 0;
     font-family: 'glacial', sans-serif;
+    /**/
 }
 
 .login-container {
@@ -24,17 +27,18 @@ html, body {
     flex-direction: row;
     width: 100%;
     height: 100vh;
+    /**/
+    /**/
 }
-
 
 .login-image-column {
     flex: 1;
-
-    background-image: url('../004.jpg'); 
-    
     background-position: center;
+    /**/
+    background-image: url('../004.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+    /**/
 }
 
 .login-form-column {
@@ -44,24 +48,28 @@ html, body {
     justify-content: center;
     padding: 40px;
     box-sizing: border-box;
+    /**/
+    /**/
 }
 
 .form-wrapper {
-    width: 100%;
-    max-width: 450px;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    max-width: 450px;
+    /**/
+    /**/
 }
 
-
 .title {
+    /**/
+    text-align: left;
+    margin-bottom: 40px;
     font-size: xx-large;
     font-family: 'glacial';
     font-weight: normal;
-    color: black;
-    text-align: left;
-    margin-bottom: 40px;
     text-decoration: none;
+    color: black;
 }
 
 .input-group {
@@ -69,29 +77,35 @@ html, body {
     flex-direction: column;
     margin-bottom: 35px;
     width: 100%;
+    /**/
+    /**/
 }
 
 .input-group label {
+    /**/
+    margin-bottom: 15px;
     font-family: 'glacial';
     font-weight: normal;
     font-size: large;
     color: black;
-    margin-bottom: 15px;
 }
 
 .input-group input {
+    /**/
+    padding: 5px 0;
     border: none;
     border-bottom: 2px solid black;
-    background-color: transparent;
     font-size: large;
-    padding: 5px 0;
     font-family: 'glacial';
+    background-color: transparent;
 }
 
-
 .input-group input:focus {
+    /**/
+    /**/
     outline: none;
     border-bottom: 2px solid #555;
+    /**/
 }
 
 .form-footer {
@@ -99,45 +113,60 @@ html, body {
     justify-content: space-between;
     align-items: center;
     margin-top: 30px;
+    /**/
+    /**/
 }
 
 .submit-btn {
-    background-color: transparent;
+    /**/
+    padding: 0;
     border: none;
     font-family: 'glacial';
     font-weight: normal;
     font-size: large;
-    color: black;
     cursor: pointer;
-    padding: 0;
+    background-color: transparent;
+    color: black;
 }
 
 .submit-btn:hover {
+    /**/
+    /**/
     font-weight: bold;
+    /**/
 }
 
+/* --- LINKS E MENSAGENS --- */
+
 .forgot-password, .crt_login_btn {
+    /**/
+    /**/
     font-family: 'glacial';
     font-weight: normal;
     font-size: medium;
-    color: black;
     text-decoration: none;
+    color: black;
 }
 
 .forgot-password:hover, .crt_login_btn:hover {
+    /**/
+    /**/
     font-weight: bold;
+    /**/
 }
-
 
 .crt_login_btn {
+    /**/
     margin-top: 40px;
     text-align: left;
+    /**/
+    /**/
 }
 
-
 .error-message {
-    color: red;
-    font-family: 'glacial';
+    /**/
     text-align: left;
     margin-top: 15px;
+    font-family: 'glacial';
+    color: red;
 }
