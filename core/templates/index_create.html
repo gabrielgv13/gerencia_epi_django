@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="login__area">
-  <a class="title">FAÇA SEU LOGIN</a>
+  <a class="title">CRIE SUA CONTA</a>
 
   <form action="{% url 'index' %}" method="post">
 
@@ -18,6 +18,10 @@
       <input type="password" name="password" id="password" required />
     </div>
     <div>
+      <label for="cf_password">CONFIRME SUA SENHA: </label>
+      <input type="cf_password" name="cf_password" id="cf_password" required />
+    </div>
+    <div>
       <input type="submit" value="ENVIAR" />
     </div>
   </form>
@@ -27,7 +31,5 @@
   {% endif %}
 
 </div>
-
-<a href="create_login" class="crt_login_btn">CRIAR CONTA</a>
 
 {% endblock %}

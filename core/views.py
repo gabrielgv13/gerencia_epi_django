@@ -33,3 +33,6 @@ def index(request):
 
 def app_welcome(request):
     return render(request, 'app_ui_welcome.html')
+
+def create_login(request):
+    return render(request, 'index_create.html')
