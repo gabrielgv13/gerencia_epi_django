@@ -1,35 +1,31 @@
 {% extends 'base_login.html' %}
 {% load static %}
 {% block content %}
-  <body class="image__text__flex">
-    
-    <div class="image__login">
+
+<div class="login__area">
+  <a class="title">FAÇA SEU LOGIN</a>
+
+  <form action="{% url 'index' %}" method="post">
+
+    {% csrf_token %}
+
+    <div>
+      <label for="email">EMAIL: </label>
+      <input type="text" name="email" id="email" required />
     </div>
-
-    <div class="login__area">
-      <a class="title">FAÇA SEU LOGIN</a>
-
-      <form action="{% url 'index' %}" method="post">
-
-        {% csrf_token %}
-
-        <div>
-          <label for="email">EMAIL: </label>
-          <input type="text" name="email" id="email" required />
-        </div>
-        <div>
-          <label for="password">SENHA: </label>
-          <input type="password" name="password" id="password" required />
-        </div>
-        <div>
-          <input type="submit" value="ENVIAR" />
-        </div>
-      </form>
-
-      {% if error %}
-        <p style="color: red;">{{ error }}</p>
-      {% endif %}
-
+    <div>
+      <label for="password">SENHA: </label>
+      <input type="password" name="password" id="password" required />
     </div>
-  </body>
+    <div>
+      <input type="submit" value="ENVIAR" />
+    </div>
+  </form>
+
+  {% if error %}
+    <p style="color: red;">{{ error }}</p>
+  {% endif %}
+
+</div>
+
 {% endblock %}
