@@ -2,34 +2,44 @@
 {% load static %}
 {% block content %}
 
-<div class="login__area">
-  <a class="title">CRIE SUA CONTA</a>
+<div class="login-container">
 
-  <form action="{% url 'login' %}" method="post">
+    <div class="login-image-column">
+        </div>
 
-    {% csrf_token %}
+    <div class="login-form-column">
+    
+        <div class="form-wrapper">
+            <h1 class="title">CRIE SEU LOGIN</h1>
+    
+            <form action="{% url 'login_create' %}" method="post">
+                {% csrf_token %}
+    
+                <div class="input-group">
+                    <label for="email">EMAIL :</label>
+                    <input type="text" name="email" id="email" required />
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">SENHA :</label>
+                    <input type="password" name="password" id="password" required />
+                </div>
+                
+                <div class="input-group">
+                    <label for="cf_password">CONFIRMAR SENHA :</label>
+                    <input type="password" name="cf_password" id="cf_password" required />
+                </div>
+    
+                {% if error %}
+                    <p class="error-message">{{ error }}</p>
+                {% endif %}
+                
+                <div class="form-footer" style="justify-content: flex-end;"> <input type="submit" value="CRIAR" class="submit-btn" />
+                </div>
+            </form>
+        </div>
 
-    <div>
-      <label for="email">EMAIL: </label>
-      <input type="text" name="email" id="email" required />
     </div>
-    <div>
-      <label for="password">SENHA: </label>
-      <input type="password" name="password" id="password" required />
-    </div>
-    <div>
-      <label for="cf_password">CONFIRME SUA SENHA: </label>
-      <input type="cf_password" name="cf_password" id="cf_password" required />
-    </div>
-    <div>
-      <input type="submit" value="ENVIAR" />
-    </div>
-  </form>
-
-  {% if error %}
-    <p style="color: red;">{{ error }}</p>
-  {% endif %}
-
 </div>
 
 {% endblock %}
