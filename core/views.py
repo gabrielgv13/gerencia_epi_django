@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 
-def index(request):
+def login(request):
 
     error_message = None  # Para enviar mensagens de erro para o template
 
@@ -29,10 +29,10 @@ def index(request):
             error_message = "Ocorreu um erro. Tente novamente."
 
     context = {'error': error_message}
-    return render(request, "index.html", context)
+    return render(request, "login.html", context)
 
 def app_welcome(request):
     return render(request, 'app_ui_welcome.html')
 
-def create_login(request):
-    return render(request, 'index_create.html')
+def login_create(request):
+    return render(request, 'login_create.html')

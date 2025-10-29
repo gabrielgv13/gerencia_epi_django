@@ -5,7 +5,7 @@
 <div class="login__area">
   <a class="title">FAÇA SEU LOGIN</a>
 
-  <form action="{% url 'index' %}" method="post">
+  <form action="{% url 'login' %}" method="post">
 
     {% csrf_token %}
 
@@ -28,6 +28,6 @@
 
 </div>
 
-<a href="create_login" class="crt_login_btn">CRIAR CONTA</a>
+<a href="login_create" class="crt_login_btn">CRIAR CONTA</a>
 
 {% endblock %}
