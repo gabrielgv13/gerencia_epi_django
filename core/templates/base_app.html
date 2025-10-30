@@ -4,16 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Estoque de EPI{% endblock %}</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
 </head>
     <header>
 
     </header>
-    <body>
-        {% block content %}
+<body>
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="{% static 'capacete.png' %}" alt="Logo">
+      <h1>Sistema de Gestão de EPIs</h1>
+    </div>
+    <nav class="menu">
+      <a href="{% url 'app_dashboard' %}" class="active">Dashboard</a>
+      <a href="{% url 'app_users' %}">Colaboradores</a>
+      <a href="{% url 'app_items' %}">Equipamentos</a>
+      <a href="{% url 'app_requests' %}">Empréstimos</a>
+      <a href="{% url 'app_history' %}">Movimentações</a>
+      <a href="{% url 'app_reports' %}">Relatórios</a>
+      <a href="{% url 'app_configs' %}">Configurações</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <div class="topbar">
+      <h2 id="page-title">{% block page_title %}Dashboard{% endblock %}</h2>
+      
+      <div class="user">
+        <div class="user-icon">👤</div>
+        <strong>{{ request.user.username }}</strong>
+        </div>
+    </div>
+
+    <div class="page-content">
+      {% block content %}
         {% endblock %}
-    </body>
+    </div>
+  </main>
+</body>
     <footer>
         
     </footer>

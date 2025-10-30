@@ -5,10 +5,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import User
 from django.db import IntegrityError
+from django.contrib.auth.decorators import login_required
 
 def login_view(request):
     if request.user.is_authenticated:
-        return redirect('app_welcome')
+        return redirect('app_dashboard') 
     error_message = None
 
     if request.method == 'POST':
@@ -22,7 +23,7 @@ def login_view(request):
 
             if user is not None:
                 auth_login(request, user)
-                return redirect('app_welcome')
+                return redirect('app_dashboard')
             else:
                 error_message = "Senha incorreta. Tente novamente."
 
@@ -34,14 +35,9 @@ def login_view(request):
     context = {'error': error_message}
     return render(request, "login.html", context)
 
-
-def app_welcome(request):
-    return render(request, 'app_ui_welcome.html')
-
-
 def login_create(request):
     if request.user.is_authenticated:
-        return redirect('app_welcome')
+        return redirect('app_dashboard')
 
     error_message = None
 
@@ -59,7 +55,7 @@ def login_create(request):
                 user_auth = authenticate(request, username=email, password=password)
                 if user_auth is not None:
                     auth_login(request, user_auth)
-                    return redirect('app_welcome') 
+                    return redirect('app_dashboard') 
                 else:
                     error_message = "Erro ao autenticar após a criação."
 
@@ -70,3 +66,31 @@ def login_create(request):
 
     context = {'error': error_message}
     return render(request, 'login_create.html', context)
+
+@login_required
+def app_dashboard(request):
+    return render(request, 'app_ui_dashboard.html')
+
+@login_required
+def app_users(request):
+    return render(request, 'app_ui_users.html')
+
+@login_required
+def app_requests(request):
+    return render(request, 'app_ui_requests.html')
+
+@login_required
+def app_history(request):
+    return render(request, 'app_ui_history.html')
+
+@login_required
+def app_reports(request):
+    return render(request, 'app_ui_reports.html')
+
+@login_required
+def app_items(request):
+    return render(request, 'app_ui_items.html')
+
+@login_required
+def app_configs(request):
+    return render(request, 'app_ui_configs.html')
