@@ -15,29 +15,37 @@
 
 html, body {
     /**/
+
     height: 100%;
     margin: 0;
     padding: 0;
+
     font-family: 'glacial', sans-serif;
+
     /**/
 }
 
 .login-container {
     display: flex;
     flex-direction: row;
+
     width: 100%;
     height: 100vh;
+
     /**/
+
     /**/
 }
 
 .login-image-column {
     flex: 1;
+
     background-position: center;
-    /**/
+
     background-image: url('../004.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+
     /**/
 }
 
@@ -46,65 +54,86 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
+
     padding: 40px;
     box-sizing: border-box;
+
     /**/
+
     /**/
 }
 
 .form-wrapper {
     display: flex;
     flex-direction: column;
+
     width: 100%;
     max-width: 450px;
+
     /**/
+
     /**/
 }
 
 .title {
     /**/
+
     text-align: left;
     margin-bottom: 40px;
+
     font-size: xx-large;
     font-family: 'glacial';
     font-weight: normal;
     text-decoration: none;
+
     color: black;
 }
 
 .input-group {
     display: flex;
     flex-direction: column;
+
     margin-bottom: 35px;
     width: 100%;
+
     /**/
+
     /**/
 }
 
 .input-group label {
     /**/
+
     margin-bottom: 15px;
+
     font-family: 'glacial';
     font-weight: normal;
     font-size: large;
+
     color: black;
 }
 
 .input-group input {
     /**/
+
     padding: 5px 0;
+
     border: none;
     border-bottom: 2px solid black;
     font-size: large;
     font-family: 'glacial';
+
     background-color: transparent;
 }
 
 .input-group input:focus {
     /**/
+
     /**/
+
     outline: none;
     border-bottom: 2px solid #555;
+
     /**/
 }
 
@@ -112,27 +141,36 @@ html, body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     margin-top: 30px;
+
     /**/
+
     /**/
 }
 
 .submit-btn {
     /**/
+
     padding: 0;
+
     border: none;
     font-family: 'glacial';
     font-weight: normal;
     font-size: large;
     cursor: pointer;
+
     background-color: transparent;
     color: black;
 }
 
 .submit-btn:hover {
     /**/
+
     /**/
+
     font-weight: bold;
+
     /**/
 }
 
@@ -140,33 +178,45 @@ html, body {
 
 .forgot-password, .crt_login_btn {
     /**/
+
     /**/
+
     font-family: 'glacial';
     font-weight: normal;
     font-size: medium;
     text-decoration: none;
+
     color: black;
 }
 
 .forgot-password:hover, .crt_login_btn:hover {
     /**/
+
     /**/
+
     font-weight: bold;
+
     /**/
 }
 
 .crt_login_btn {
     /**/
+
     margin-top: 40px;
     text-align: left;
+
     /**/
+
     /**/
 }
 
 .error-message {
     /**/
+
     text-align: left;
     margin-top: 15px;
+
     font-family: 'glacial';
+
     color: red;
 }
