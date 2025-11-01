@@ -88,4 +88,4 @@ As classes em CSS devem seguir uma ordem estrita de propriedades para facilitar 
 
 Se uma seção não for utilizada, um comentário `/**/` deve ser usado como placeholder.
 
-> **Referência:** Veja o arquivo `Documentação.pdf` (ou `style.
+> **Referência:** Veja o arquivo [POC - Site EPI - Documentação](https://docs.google.com/document/d/1gFAGJrPve8jg-hyKuUIHOoVFtWEwkaH8_DBXnR3ByYk/edit?usp=sharing)
