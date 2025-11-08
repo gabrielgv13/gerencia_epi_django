@@ -4,14 +4,15 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import User
-from django.db import IntegrityError # Removido, pois o form agora cuida disso
 from django.contrib.auth.decorators import login_required
-from .models import Colaborador # <-- Importe o modelo
-from .forms import ColaboradorForm # <-- Importe o novo formulário
 
-# Importe seus novos formulários
-from . import forms
+# --- IMPORTS CORRIGIDOS ---
+# Importa os modelos
+from .models import Colaborador, Equipamento 
+# Importa TODOS os formulários que vamos usar
+from .forms import LoginForm, RegistrationForm, ColaboradorForm, EquipamentoForm
 
+# --- VIEW DE LOGIN (USANDO FORM) ---
 def login_view(request):
     if request.user.is_authenticated:
         return redirect('app_dashboard')
@@ -19,16 +20,15 @@ def login_view(request):
     error_message = None
 
     if request.method == 'POST':
-        # 1. Crie uma instância do formulário com os dados POST
-        form = forms.LoginForm(request.POST)
+        # 1. Crie uma instância do formulário
+        form = LoginForm(request.POST) # Usa o LoginForm
         
-        # 2. Verifique se o formulário é válido (campos preenchidos, email tem formato de email)
+        # 2. Verifique se é válido
         if form.is_valid():
             cd = form.cleaned_data
             email = cd.get('email')
             password = cd.get('password')
 
-            # Sua lógica de autenticação existente
             try:
                 user_obj = User.objects.get(email=email)
                 username = user_obj.username
@@ -44,33 +44,28 @@ def login_view(request):
                 error_message = "Nenhum usuário encontrado com este email."
             except Exception as e:
                 error_message = f"Ocorreu um erro: {e}"
-        # Se o formulário não for válido (ex: email mal formatado), 
-        # o 'form' será passado ao template com os erros.
-        # (Mas mantemos error_message para erros de *autenticação*)
-
     else:
         # 3. Se for GET, crie um formulário vazio
-        form = forms.LoginForm()
+        form = LoginForm()
 
     context = {'form': form, 'error': error_message}
     return render(request, "login.html", context)
 
 
+# --- VIEW DE CRIAÇÃO DE CONTA (USANDO FORM) ---
 def login_create(request):
     if request.user.is_authenticated:
         return redirect('app_dashboard')
 
     if request.method == 'POST':
-        form = forms.RegistrationForm(request.POST)
+        form = RegistrationForm(request.POST) # Usa o RegistrationForm
         
         if form.is_valid():
-            # 1. Os dados estão validados! (Email é email, senhas batem, email não existe)
             cd = form.cleaned_data
             email = cd.get('email')
             password = cd.get('password')
 
             try:
-                # Usamos username=email por padrão, como na sua view original
                 user = User.objects.create_user(username=email, email=email, password=password)
                 
                 user_auth = authenticate(request, username=email, password=password)
@@ -78,34 +73,45 @@ def login_create(request):
                     auth_login(request, user_auth)
                     return redirect('app_dashboard')
                 else:
-                    # Este erro é improvável, mas é bom ter
                     form.add_error(None, "Erro ao autenticar após a criação.")
 
             except Exception as e:
-                # Erro genérico
                 form.add_error(None, f"Ocorreu um erro inesperado: {e}")
-
     else:
-        form = forms.RegistrationForm()
+        form = RegistrationForm()
 
-    # 2. Note que não precisamos mais de 'error_message'. 
-    # O próprio 'form' carrega todos os erros.
+    # O 'form' carrega todos os erros de validação
     context = {'form': form}
     return render(request, 'login_create.html', context)
 
-# ... (suas outras views 'app_*' permanecem iguais) ...
+
 @login_required
 def app_dashboard(request):
     return render(request, 'app_ui_dashboard.html')
 
+# --- CRUD DE COLABORADORES ---
+
 @login_required
 def app_users(request):
     """
-    READ (List): Mostra todos os colaboradores em uma tabela.
+    READ (List): Mostra todos os colaboradores.
     """
-    colaboradores_list = Colaborador.objects.all().order_by('nome') # Pega todos, ordena por nome
+    colaboradores = Colaborador.objects.all().order_by('nome')
+    
+    object_data = []
+    for col in colaboradores:
+        object_data.append({
+            'pk': col.pk,
+            'fields': [col.nome, col.email]
+        })
+
     context = {
-        'colaboradores': colaboradores_list
+        'page_title': 'Colaboradores',
+        'headers': ['Nome', 'Email'],
+        'object_data': object_data,
+        'add_url_name': 'app_users_create',
+        'edit_url_name': 'app_users_edit',   
+        'delete_url_name': 'app_users_delete', 
     }
     return render(request, 'app_ui_users.html', context) #
 
@@ -117,56 +123,144 @@ def app_users_create(request):
     if request.method == 'POST':
         form = ColaboradorForm(request.POST)
         if form.is_valid():
-            form.save() # Salva o novo colaborador no banco
-            return redirect('app_users') # Redireciona para a lista
+            form.save()
+            return redirect('app_users')
     else:
-        form = ColaboradorForm() # Cria um formulário vazio
+        form = ColaboradorForm()
 
     context = {
         'form': form,
-        'page_title': 'Cadastrar Novo Colaborador' # Título para o template
+        'page_title': 'Cadastrar Novo Colaborador'
     }
-    # Vamos reutilizar um template de formulário
-    return render(request, 'app_ui_users_form.html', context)
+    # Usa o template de formulário genérico
+    return render(request, 'app_ui_form_base.html', context)
 
 @login_required
 def app_users_edit(request, pk):
     """
     UPDATE: Edita um colaborador existente.
-    'pk' é a Primary Key (ID) do colaborador vindo da URL.
-    """
-    colaborador = get_object_or_404(Colaborador, pk=pk) # Pega o colaborador ou retorna Erro 404
-
-    if request.method == 'POST':
-        form = ColaboradorForm(request.POST, instance=colaborador) # Carrega o form com dados existentes
-        if form.is_valid():
-            form.save() # Salva as mudanças
-            return redirect('app_users')
-    else:
-        form = ColaboradorForm(instance=colaborador) # Abre o form preenchido com dados atuais
-
-    context = {
-        'form': form,
-        'page_title': f'Editar Colaborador: {colaborador.nome}' # Título para o template
-    }
-    return render(request, 'app_ui_users_form.html', context) # Reutiliza o mesmo template
-
-@login_required
-def app_users_delete(request, pk):
-    """
-    DELETE: Exclui um colaborador (com página de confirmação).
     """
     colaborador = get_object_or_404(Colaborador, pk=pk)
 
     if request.method == 'POST':
-        colaborador.delete() # Exclui o colaborador
+        form = ColaboradorForm(request.POST, instance=colaborador)
+        if form.is_valid():
+            form.save()
+            return redirect('app_users')
+    else:
+        form = ColaboradorForm(instance=colaborador)
+
+    context = {
+        'form': form,
+        'page_title': f'Editar Colaborador: {colaborador.nome}'
+    }
+    # Usa o template de formulário genérico
+    return render(request, 'app_ui_form_base.html', context)
+
+@login_required
+def app_users_delete(request, pk):
+    """
+    DELETE: Exclui um colaborador.
+    """
+    colaborador = get_object_or_404(Colaborador, pk=pk)
+
+    if request.method == 'POST':
+        colaborador.delete()
         return redirect('app_users')
 
-    # Se for GET, mostra a página de confirmação
+    # --- CORREÇÃO AQUI ---
+    # Passa o 'item' para o template de deleção genérico
     context = {
-        'colaborador': colaborador
+        'item': colaborador 
     }
-    return render(request, 'app_ui_users_delete_confirm.html', context)
+    # Usa o template de deleção genérico
+    return render(request, 'app_ui_delete_confirm_base.html', context)
+
+
+# --- CRUD DE EQUIPAMENTOS ---
+
+@login_required
+def app_items(request):
+    """
+    READ (List): Mostra todos os equipamentos.
+    """
+    equipamentos = Equipamento.objects.all().order_by('nome')
+    
+    object_data = []
+    for item in equipamentos:
+        object_data.append({
+            'pk': item.pk,
+            'fields': [item.nome, item.marca, item.quantidade]
+        })
+
+    context = {
+        'page_title': 'Equipamentos',
+        'headers': ['Nome', 'Marca', 'Quantidade'],
+        'object_data': object_data,
+        'add_url_name': 'app_items_create',
+        'edit_url_name': 'app_items_edit',   
+        'delete_url_name': 'app_items_delete', 
+    }
+    return render(request, 'app_ui_items.html', context)
+
+@login_required
+def app_items_create(request):
+    """
+    CREATE: Adiciona um novo equipamento.
+    """
+    if request.method == 'POST':
+        form = EquipamentoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('app_items')
+    else:
+        form = EquipamentoForm()
+
+    context = {
+        'form': form,
+        'page_title': 'Cadastrar Novo Equipamento'
+    }
+    return render(request, 'app_ui_form_base.html', context)
+
+@login_required
+def app_items_edit(request, pk):
+    """
+    UPDATE: Edita um equipamento existente.
+    """
+    item = get_object_or_404(Equipamento, pk=pk)
+
+    if request.method == 'POST':
+        form = EquipamentoForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return redirect('app_items')
+    else:
+        form = EquipamentoForm(instance=item)
+
+    context = {
+        'form': form,
+        'page_title': f'Editar Equipamento: {item.nome}'
+    }
+    return render(request, 'app_ui_form_base.html', context)
+
+@login_required
+def app_items_delete(request, pk):
+    """
+    DELETE: Exclui um equipamento.
+    """
+    item = get_object_or_404(Equipamento, pk=pk)
+
+    if request.method == 'POST':
+        item.delete()
+        return redirect('app_items')
+
+    context = {
+        'item': item
+    }
+    return render(request, 'app_ui_delete_confirm_base.html', context)
+
+
+# --- OUTRAS VIEWS DO APP ---
 
 @login_required
 def app_requests(request):
@@ -179,10 +273,6 @@ def app_history(request):
 @login_required
 def app_reports(request):
     return render(request, 'app_ui_reports.html')
-
-@login_required
-def app_items(request):
-    return render(request, 'app_ui_items.html')
 
 @login_required
 def app_configs(request):

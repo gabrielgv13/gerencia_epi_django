@@ -5,12 +5,9 @@
 
 {% block nav %}
     <a href="{% url 'app_dashboard' %}">Dashboard</a>
-    <a href="{% url 'app_users' %}" class="active">Colaboradores</a>
+    <a href="{% url 'app_users' %}">Colaboradores</a>
     <a href="{% url 'app_items' %}">Equipamentos</a>
-    <a href="{% url 'app_requests' %}">Empréstimos</a>
-    <a href="{% url 'app_history' %}">Movimentações</a>
-    <a href="{% url 'app_reports' %}">Relatórios</a>
-    <a href="{% url 'app_configs' %}">Configurações</a>
+    ... (etc) ...
 {% endblock %}
 
 {% block content %}
@@ -18,12 +15,10 @@
 
     <form method="POST" class="form-default">
         {% csrf_token %}
-        
         {{ form.as_p }}
-
         <div class="form-actions">
             <button type="submit" class="btn-save">Salvar</button>
-            <a href="{% url 'app_users' %}" class="btn-cancel">Cancelar</a>
+            <a href="javascript:history.back()" class="btn-cancel">Cancelar</a>
         </div>
     </form>
 {% endblock %}

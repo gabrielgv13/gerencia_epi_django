@@ -7,8 +7,6 @@ urlpatterns = [
     path('', views.login_view, name='login'),
     path('login_create', views.login_create, name='login_create'),
     
-    # Rotas do App
-    # A 'app_welcome' foi removida e substituída pela 'app_dashboard'
     path('app/dashboard', views.app_dashboard, name='app_dashboard'),
 
     path('app/users', views.app_users, name='app_users'),
@@ -17,8 +15,12 @@ urlpatterns = [
     path('app/users/edit/<int:pk>/', views.app_users_edit, name='app_users_edit'), # UPDATE
     path('app/users/delete/<int:pk>/', views.app_users_delete, name='app_users_delete'), # DELETE
     
-    # NOVAS URLS:
     path('app/items', views.app_items, name='app_items'),
+    path('app/items', views.app_items, name='app_items'), # READ
+    path('app/items/create/', views.app_items_create, name='app_items_create'), # CREATE
+    path('app/items/edit/<int:pk>/', views.app_items_edit, name='app_items_edit'), # UPDATE
+    path('app/items/delete/<int:pk>/', views.app_items_delete, name='app_items_delete'), # DELETE
+
     path('app/requests', views.app_requests, name='app_requests'),
     path('app/history', views.app_history, name='app_history'),
     path('app/reports', views.app_reports, name='app_reports'),

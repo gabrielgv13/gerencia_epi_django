@@ -1,7 +1,7 @@
 # forms.py
 from django import forms
 from django.contrib.auth.models import User
-from .models import Colaborador
+from .models import Colaborador, Equipamento
 
 class LoginForm(forms.Form):
     # O widget de EmailInput garante a validação básica do formato
@@ -63,4 +63,19 @@ class ColaboradorForm(forms.ModelForm):
         labels = {
             'nome': 'Nome do Colaborador',
             'email': 'Email Profissional',
+        }
+
+class EquipamentoForm(forms.ModelForm):
+    class Meta:
+        model = Equipamento
+        fields = ['nome', 'marca', 'quantidade']
+        widgets = {
+            'nome': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Ex: Capacete'}),
+            'marca': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Ex: 3M'}),
+            'quantidade': forms.NumberInput(attrs={'class': 'form-input', 'min': '0'}),
+        }
+        labels = {
+            'nome': 'Nome do Equipamento',
+            'marca': 'Marca',
+            'quantidade': 'Quantidade em Estoque',
         }
