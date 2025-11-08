@@ -111,7 +111,8 @@ def app_users(request):
         'object_data': object_data,
         'add_url_name': 'app_users_create',
         'edit_url_name': 'app_users_edit',   
-        'delete_url_name': 'app_users_delete', 
+        'delete_url_name': 'app_users_delete',
+        'active_nav': 'users'
     }
     return render(request, 'app_ui_users.html', context) #
 
@@ -130,7 +131,8 @@ def app_users_create(request):
 
     context = {
         'form': form,
-        'page_title': 'Cadastrar Novo Colaborador'
+        'page_title': 'Cadastrar Novo Colaborador',
+        'active_nav': 'users'
     }
     # Usa o template de formulário genérico
     return render(request, 'app_ui_form_base.html', context)
@@ -171,7 +173,8 @@ def app_users_delete(request, pk):
     # --- CORREÇÃO AQUI ---
     # Passa o 'item' para o template de deleção genérico
     context = {
-        'item': colaborador 
+        'item': colaborador,
+        'active_nav': 'users' 
     }
     # Usa o template de deleção genérico
     return render(request, 'app_ui_delete_confirm_base.html', context)
@@ -199,7 +202,8 @@ def app_items(request):
         'object_data': object_data,
         'add_url_name': 'app_items_create',
         'edit_url_name': 'app_items_edit',   
-        'delete_url_name': 'app_items_delete', 
+        'delete_url_name': 'app_items_delete',
+        'active_nav': 'items' 
     }
     return render(request, 'app_ui_items.html', context)
 
@@ -218,7 +222,8 @@ def app_items_create(request):
 
     context = {
         'form': form,
-        'page_title': 'Cadastrar Novo Equipamento'
+        'page_title': 'Cadastrar Novo Equipamento',
+        'active_nav': 'items'
     }
     return render(request, 'app_ui_form_base.html', context)
 
@@ -239,7 +244,8 @@ def app_items_edit(request, pk):
 
     context = {
         'form': form,
-        'page_title': f'Editar Equipamento: {item.nome}'
+        'page_title': f'Editar Equipamento: {item.nome}',
+        'active_nav': 'items'
     }
     return render(request, 'app_ui_form_base.html', context)
 
@@ -255,7 +261,8 @@ def app_items_delete(request, pk):
         return redirect('app_items')
 
     context = {
-        'item': item
+        'item': item,
+        'active_nav': 'items'
     }
     return render(request, 'app_ui_delete_confirm_base.html', context)
 
