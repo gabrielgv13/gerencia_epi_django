@@ -4,6 +4,16 @@
     Dashboard
 {% endblock %}
 
+{% block nav %}
+    <a href="{% url 'app_dashboard' %}" class="active">Dashboard</a>
+    <a href="{% url 'app_users' %}">Colaboradores</a>
+    <a href="{% url 'app_items' %}">Equipamentos</a>
+    <a href="{% url 'app_requests' %}">Empréstimos</a>
+    <a href="{% url 'app_history' %}">Movimentações</a>
+    <a href="{% url 'app_reports' %}">Relatórios</a>
+    <a href="{% url 'app_configs' %}">Configurações</a>
+    {% endblock %}
+
 {% block content %}
     <p>Dashboard</p>
 {% endblock %}
