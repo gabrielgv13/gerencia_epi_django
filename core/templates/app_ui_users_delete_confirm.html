@@ -1,0 +1,30 @@
+{% extends 'base_app.html' %}
+
+{% block page_title %}
+    Confirmar Exclusão
+{% endblock %}
+
+{% block nav %}
+    <a href="{% url 'app_dashboard' %}">Dashboard</a>
+    <a href="{% url 'app_users' %}" class="active">Colaboradores</a>
+    <a href="{% url 'app_items' %}">Equipamentos</a>
+    <a href="{% url 'app_requests' %}">Empréstimos</a>
+    <a href="{% url 'app_history' %}">Movimentações</a>
+    <a href="{% url 'app_reports' %}">Relatórios</a>
+    <a href="{% url 'app_configs' %}">Configurações</a>
+{% endblock %}
+
+{% block content %}
+    <h2>Confirmar Exclusão</h2>
+    
+    <p>Você tem certeza que deseja excluir o colaborador <strong>"{{ colaborador.nome }}"</strong>?</p>
+    <p>Esta ação não pode ser desfeita.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-actions">
+            <button type="submit" class="btn-delete">Sim, excluir</button>
+            <a href="{% url 'app_users' %}" class="btn-cancel">Cancelar</a>
+        </div>
+    </form>
+{% endblock %}

@@ -1,19 +1,46 @@
-{% extends 'base_app.html' %}
-
-{% block page_title %}
+{% extends 'base_app.html' %} {% block page_title %}
     Colaboradores
 {% endblock %}
 
 {% block nav %}
     <a href="{% url 'app_dashboard' %}">Dashboard</a>
-    <a href="{% url 'app_users' %}" class="active">Colaboradores</a>
-    <a href="{% url 'app_items' %}">Equipamentos</a>
+    <a href="{% url 'app_users' %}" class="active">Colaboradores</a> <a href="{% url 'app_items' %}">Equipamentos</a>
     <a href="{% url 'app_requests' %}">Empréstimos</a>
     <a href="{% url 'app_history' %}">Movimentações</a>
     <a href="{% url 'app_reports' %}">Relatórios</a>
     <a href="{% url 'app_configs' %}">Configurações</a>
-    {% endblock %}
+{% endblock %}
 
 {% block content %}
-    <p>Colaboradores</p>
+    <div class="page-header">
+        <h2>Lista de Colaboradores</h2>
+        <a href="{% url 'app_users_create' %}" class="btn-add">Adicionar Colaborador +</a>
+    </div>
+
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for col in colaboradores %}
+                <tr>
+                    <td>{{ col.nome }}</td>
+                    <td>{{ col.email }}</td>
+                    <td class="actions">
+                        <a href="{% url 'app_users_edit' col.pk %}" class="btn-edit">Editar</a>
+                        <a href="{% url 'app_users_delete' col.pk %}" class="btn-delete">Excluir</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">Nenhum colaborador cadastrado ainda.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 {% endblock %}

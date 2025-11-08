@@ -10,7 +10,12 @@ urlpatterns = [
     # Rotas do App
     # A 'app_welcome' foi removida e substituída pela 'app_dashboard'
     path('app/dashboard', views.app_dashboard, name='app_dashboard'),
+
     path('app/users', views.app_users, name='app_users'),
+    path('app/users', views.app_users, name='app_users'), # READ (List)
+    path('app/users/create/', views.app_users_create, name='app_users_create'), # CREATE
+    path('app/users/edit/<int:pk>/', views.app_users_edit, name='app_users_edit'), # UPDATE
+    path('app/users/delete/<int:pk>/', views.app_users_delete, name='app_users_delete'), # DELETE
     
     # NOVAS URLS:
     path('app/items', views.app_items, name='app_items'),
