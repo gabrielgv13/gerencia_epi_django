@@ -1,3 +1,4 @@
+/* usado para todas as páginas que contém app como prefixo */
 body {
   display: flex;
 
@@ -204,3 +205,18 @@ th {
   
   background-color: #f0f0f0;
 }
+
+.messages-container-form {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.message {
+    padding: 15px 25px;
+    border-radius: 5px;
+    color: #fff;
+    display: inline-block;
+    font-weight: bold;
+}
+.message.success { background-color: #28a745; }
+.message.error { background-color: #dc3545; }
