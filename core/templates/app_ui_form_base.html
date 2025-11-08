@@ -1,0 +1,24 @@
+{% extends 'base_app.html' %}
+
+{% block page_title %}
+    {{ page_title }} {% endblock %}
+
+{% block nav %}
+    <a href="{% url 'app_dashboard' %}">Dashboard</a>
+    <a href="{% url 'app_users' %}">Colaboradores</a>
+    <a href="{% url 'app_items' %}">Equipamentos</a>
+    ... (etc) ...
+{% endblock %}
+
+{% block content %}
+    <h2>{{ page_title }}</h2>
+
+    <form method="POST" class="form-default">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-actions">
+            <button type="submit" class="btn-save">Salvar</button>
+            <a href="javascript:history.back()" class="btn-cancel">Cancelar</a>
+        </div>
+    </form>
+{% endblock %}

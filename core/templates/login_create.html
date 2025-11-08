@@ -16,22 +16,31 @@
                 {% csrf_token %}
     
                 <div class="input-group">
-                    <label for="email">EMAIL :</label>
-                    <input type="text" name="email" id="email" required />
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <p class="error-message">{{ form.email.errors|striptags }}</p>
+                    {% endif %}
                 </div>
                 
                 <div class="input-group">
-                    <label for="password">SENHA :</label>
-                    <input type="password" name="password" id="password" required />
+                    {{ form.password.label_tag }}
+                    {{ form.password }}
+                    {% if form.password.errors %}
+                        <p class="error-message">{{ form.password.errors|striptags }}</p>
+                    {% endif %}
                 </div>
                 
                 <div class="input-group">
-                    <label for="cf_password">CONFIRMAR SENHA :</label>
-                    <input type="password" name="cf_password" id="cf_password" required />
+                    {{ form.cf_password.label_tag }}
+                    {{ form.cf_password }}
+                    {% if form.cf_password.errors %}
+                        <p class="error-message">{{ form.cf_password.errors|striptags }}</p>
+                    {% endif %}
                 </div>
     
-                {% if error %}
-                    <p class="error-message">{{ error }}</p>
+                {% if form.non_field_errors %}
+                    <p class="error-message">{{ form.non_field_errors|striptags }}</p>
                 {% endif %}
                 
                 <div class="form-footer" style="justify-content: flex-end;"> <input type="submit" value="CRIAR" class="submit-btn" />
