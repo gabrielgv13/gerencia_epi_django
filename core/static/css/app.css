@@ -17,6 +17,7 @@ body {
 
   width: 250px;
   padding-top: 20px;
+  padding: 10px 20px;
   
   border-right: 2px solid #ddd;
 
@@ -39,14 +40,10 @@ body {
 }
 
 .logo img {
-  /**/
-
-  width: 70px;
-  height: 70px;
-
-  /**/
-
-  /**/
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-right: 10px;
 }
 
 .logo h1 {
